@@ -1,0 +1,423 @@
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+}
+
+.stat-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.stat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.stat-trend {
+    font-size: 0.75rem;
+    background: var(--bg-color);
+    padding: 0.25rem 0.6rem;
+    border-radius: 9999px;
+    color: var(--text-secondary);
+}
+
+.stat-icon {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+}
+
+.text-blue {
+    color: #3b82f6;
+}
+
+.text-yellow {
+    color: #f59e0b;
+}
+
+.text-red {
+    color: #ef4444;
+}
+
+.text-green {
+    color: #10b981;
+}
+
+.stat-body h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 0.25rem 0;
+    color: var(--text-primary);
+    font-family: var(--body-font);
+}
+
+.stat-body p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.dashboard-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.card-header h2 {
+    font-family: var(--heading-font);
+    font-size: 1.15rem;
+    margin: 0;
+}
+
+.subtitle {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    display: block;
+    margin-top: 0.25rem;
+}
+
+/* Donut Chart Mock */
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 0;
+}
+
+.donut-chart {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: conic-gradient(#ef4444 0% 15%,
+            /* High risk - red */
+            #f59e0b 15% 45%,
+            /* Medium risk - yellow */
+            #10b981 45% 100%
+            /* Low risk - green */
+        );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.donut-hole {
+    width: 140px;
+    height: 140px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.donut-value {
+    font-family: var(--heading-font);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.2;
+}
+
+.donut-label {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    letter-spacing: 1px;
+}
+
+.chart-legend {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.bg-green {
+    background-color: #10b981;
+}
+
+.bg-yellow {
+    background-color: #f59e0b;
+}
+
+.bg-red {
+    background-color: #ef4444;
+}
+
+/* Recent Apps List */
+.apps-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.app-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem 0;
+}
+
+.app-initial {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.initial-low {
+    color: #10b981;
+    background-color: #ecfdf5;
+}
+
+.initial-medium {
+    color: #f59e0b;
+    background-color: #fffbeb;
+}
+
+.initial-high {
+    color: #ef4444;
+    background-color: #fef2f2;
+}
+
+.app-info {
+    flex: 1;
+}
+
+.app-info h4 {
+    font-size: 0.95rem;
+    margin: 0 0 0.25rem 0;
+    font-family: var(--body-font);
+}
+
+.app-info p {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.app-score {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
+}
+
+.score-value {
+    font-weight: 700;
+    font-size: 1.1rem;
+    font-family: var(--heading-font);
+}
+
+/* ===============================
+   AI RESULT OUTPUT PANEL
+================================= */
+
+.ai-panel-card {
+    flex: 1;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+    text-align: center;
+}
+
+/* Header */
+.ai-panel-card h4 {
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    color: #64748b;
+    margin-bottom: 0.5rem;
+}
+
+.ai-panel-card h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0.5rem 0 1rem 0;
+}
+
+/* Trust Score */
+.mega-score {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0.5rem 0;
+}
+
+.trust-label {
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    color: #64748b;
+    margin-bottom: 1rem;
+}
+
+/* Progress Bar */
+.score-progress-bg {
+    width: 100%;
+    height: 8px;
+    background: #e5e7eb;
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 1rem 0 1.5rem 0;
+}
+
+.score-progress-fill {
+    height: 100%;
+    border-radius: 6px;
+    transition: width 0.6s ease;
+}
+
+/* Risk Colors */
+.bg-low {
+    background: #16a34a;
+}
+
+.bg-medium {
+    background: #f59e0b;
+}
+
+.bg-high {
+    background: #dc2626;
+}
+
+/* Default Probability */
+.default-prob {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin-bottom: 1rem;
+}
+
+.default-prob span {
+    font-weight: 600;
+    color: #0f172a;
+}
+
+/* Risk Pill */
+.risk-pill {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.pill-low {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.pill-medium {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.pill-high {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+/* Risk Factors Box */
+.risk-factors-section {
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 1rem;
+    text-align: left;
+    margin-bottom: 1.5rem;
+}
+
+.risk-factors-section h4 {
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    margin-bottom: 0.75rem;
+    color: #0f172a;
+}
+
+.risk-factors-section ul {
+    padding-left: 1rem;
+    margin: 0;
+}
+
+.risk-factors-section li {
+    font-size: 0.85rem;
+    margin-bottom: 0.4rem;
+    color: #334155;
+}
+
+/* Action Buttons */
+.action-buttons-row {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.action-buttons-row button {
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-approve {
+    background: #16a34a;
+    color: white;
+}
+
+.btn-approve:hover {
+    background: #15803d;
+}
+
+.btn-review {
+    background: #f59e0b;
+    color: white;
+}
+
+.btn-review:hover {
+    background: #d97706;
+}
+
+.btn-reject {
+    background: #dc2626;
+    color: white;
+}
+
+.btn-reject:hover {
+    background: #b91c1c;
+}
