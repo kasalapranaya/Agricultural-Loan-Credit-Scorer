@@ -11,12 +11,12 @@ model_features = list(model.feature_names_in_)
 # TEST INPUT (Matches UI Ranges)
 # ---------------------------------------
 api_input = {
-    "land_size": 2,                 # 1–100
-    "loan_amount": 50000,          # 0–10L
-    "soil_fertility_score": 60,     # 0–100%
-    "yield_stability_score": 20,    # 0–100%
-    "rainfall_deviation": 40,        # -50 to 50
-    "crop_type": "Rice"
+    "land_size": 6,                 # 1–100
+    "loan_amount": 420000,          # 0–10L
+    "soil_fertility_score": 80,     # 0–100%
+    "yield_stability_score": 70,    # 0–100%
+    "rainfall_deviation": 10,        # -50 to 50
+    "crop_type": "Wheat"
 }
 
 # ---------------------------------------
@@ -94,3 +94,6 @@ print("Weather Risk Index:", round(weather_risk_index, 3))
 print("Soil Productivity Index:", round(soil_productivity_index, 3))
 print("Farm Strength Index:", round(farm_strength_index, 3))
 print("Income Stability Score:", round(income_stability_score, 3))
+
+
+

@@ -26,7 +26,7 @@ for table in tables:
 irrigation_types = ["Drip", "Sprinkler", "Flood"]
 farmers = []
 
-for i in range(1, 1001):
+for i in range(1, 10001):
     farmer_id = f"F{i:04d}"
     land_size = round(random.uniform(1, 100), 2)  # 1–100 acres
     irrigation_type = random.choice(irrigation_types)

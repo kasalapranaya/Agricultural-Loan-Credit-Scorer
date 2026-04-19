@@ -1,15 +1,25 @@
-import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, Users, FilePlus, BarChart2, Leaf, ChevronLeft } from 'lucide-react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { LayoutDashboard, Users, FilePlus, BarChart2, Leaf, ChevronLeft, LogOut, TrendingUp } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 import './Sidebar.css';
 
 const navItems = [
     { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { path: '/profiles', label: 'Farmer Profiles', icon: Users },
     { path: '/new-loan', label: 'New Loan Request', icon: FilePlus },
+    { path: '/tracking', label: 'Loan Tracking', icon: TrendingUp },
     { path: '/reports', label: 'Reports', icon: BarChart2 },
 ];
 
 function Sidebar() {
+    const { user, logout } = useAuth();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        logout();
+        navigate('/login');
+    };
+
     return (
         <aside className="sidebar">
             <div className="sidebar-header">
@@ -43,12 +53,18 @@ function Sidebar() {
                 </nav>
             </div>
 
-            <div className="user-profile">
-                <div className="avatar">D</div>
-                <div className="user-info">
-                    <p className="user-role">Sr. Loan Officer</p>
-                    <p className="user-name">DHARANI</p>
+            <div className="sidebar-footer">
+                <div className="user-profile">
+                    <div className="avatar">{user?.name?.charAt(0) || 'U'}</div>
+                    <div className="user-info">
+                        <p className="user-role">{user?.role || 'User'}</p>
+                        <p className="user-name">{user?.name || 'Unknown'}</p>
+                    </div>
                 </div>
+                <button className="logout-btn" onClick={handleLogout}>
+                    <LogOut size={18} />
+                    <span>Logout</span>
+                </button>
             </div>
         </aside>
     );

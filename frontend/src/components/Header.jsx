@@ -29,11 +29,6 @@ function Header() {
                     <span className="status-dot"></span>
                     <span>System Online</span>
                 </div>
-
-                <button className="logout-btn">
-                    <LogOut size={16} />
-                    <span>Logout</span>
-                </button>
             </div>
         </header>
     );

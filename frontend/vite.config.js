@@ -10,6 +10,14 @@ export default defineConfig({
         target: 'http://127.0.0.1:5000',
         changeOrigin: true,
       },
+      '/applications': {
+        target: 'http://127.0.0.1:5000',
+        changeOrigin: true,
+      },
+      '/dashboard': {
+        target: 'http://127.0.0.1:5000',
+        changeOrigin: true,
+      },
     },
   },
 })

@@ -1,0 +1,192 @@
+.tracking-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    animation: fadeSlideIn 0.3s ease-out;
+}
+
+.overview-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #ffffff 0%, #f1f8f5 100%);
+}
+
+.overview-header h2 {
+    font-family: var(--heading-font);
+    font-size: 1.8rem;
+    color: var(--text-primary);
+    margin: 0 0 0.5rem 0;
+}
+
+.tracking-stats {
+    display: flex;
+    gap: 2rem;
+}
+
+.t-stat {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: white;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.t-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bg-green-light { background: #dcfce7; }
+.bg-blue-light { background: #dbeafe; }
+
+.t-stat h4 {
+    margin: 0 0 0.2rem 0;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+}
+
+.t-stat p {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+    font-family: var(--heading-font);
+}
+
+.list-card {
+    padding: 1.5rem;
+}
+
+.tracking-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tracking-table th {
+    text-align: left;
+    padding: 1.2rem 1rem;
+    border-bottom: 2px solid #e2e8f0;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #64748b;
+    text-transform: uppercase;
+}
+
+.tracking-table td {
+    padding: 1.2rem 1rem;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 0.95rem;
+    color: #334155;
+    vertical-align: middle;
+}
+
+.borrower-cell {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.b-name {
+    display: block;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.b-crop {
+    display: block;
+    font-size: 0.8rem;
+    color: #64748b;
+    margin-top: 0.2rem;
+}
+
+.amount-cell {
+    font-family: var(--heading-font);
+    font-weight: 700;
+    color: #16a34a;
+}
+
+.time-remaining {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #d97706;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.progress-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.progress-track {
+    width: 60px;
+    height: 6px;
+    background: #e2e8f0;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: #16a34a;
+    border-radius: 3px;
+    transition: width 1s ease-out;
+}
+
+.progress-text {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #16a34a;
+}
+
+.interactive-row {
+    transition: all 0.2s ease;
+    cursor: default;
+}
+
+.interactive-row:hover {
+    background-color: #f8fafc;
+    transform: translateX(4px);
+    box-shadow: -2px 0 0 #2ecc71;
+}
+
+.total-payable-cell {
+    font-weight: 700;
+    color: #0f172a;
+    font-family: var(--heading-font);
+}
+
+.text-secondary {
+    color: #64748b;
+    font-size: 0.85rem;
+}
+
+.animate-delay-1 {
+    animation-delay: 0.1s;
+}
+
+@keyframes fadeSlideIn {
+
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.tracking-table tbody tr {
+    animation: fadeSlideIn 0.3s ease-out backwards;
+}
+
+.tracking-table tbody tr:nth-child(1) { animation-delay: 0.05s; }
+.tracking-table tbody tr:nth-child(2) { animation-delay: 0.1s; }
+.tracking-table tbody tr:nth-child(3) { animation-delay: 0.15s; }
+.tracking-table tbody tr:nth-child(4) { animation-delay: 0.2s; }
+.tracking-table tbody tr:nth-child(5) { animation-delay: 0.25s; }

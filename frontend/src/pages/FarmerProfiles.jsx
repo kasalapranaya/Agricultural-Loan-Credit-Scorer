@@ -1,23 +1,62 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './FarmerProfiles.css';
 
-const farmersList = [
-    { id: 'F-2024-001', initial: 'R', name: 'Ramesh Kumar Patel', location: 'Nashik', crop: 'Sugarcane', risk: 'LOW', score: 82, landSize: '4.5 Acres', irrigation: 'Drip Irrigation', soil: '7.8 / 10', yield: '8.1 / 10', rain: '-4.2%', defaultProb: '8.0%' },
-    { id: 'F-2024-002', initial: 'S', name: 'Sunita Devi Sharma', location: 'Pune', crop: 'Wheat', risk: 'MEDIUM', score: 61, landSize: '2.1 Acres', irrigation: 'Canal', soil: '6.5 / 10', yield: '7.0 / 10', rain: '+2.1%', defaultProb: '31.0%' },
-    { id: 'F-2024-003', initial: 'G', name: 'Gopal Singh Yadav', location: 'Amravati', crop: 'Cotton', risk: 'HIGH', score: 41, landSize: '8.0 Acres', irrigation: 'Borewell', soil: '4.5 / 10', yield: '5.2 / 10', rain: '-12.5%', defaultProb: '67.0%' },
-    { id: 'F-2024-004', initial: 'P', name: 'Priya Bai Meena', location: 'Satara', crop: 'Soybean', risk: 'LOW', score: 78, landSize: '3.2 Acres', irrigation: 'Sprinkler', soil: '8.0 / 10', yield: '7.9 / 10', rain: '+5.0%', defaultProb: '12.0%' },
-    { id: 'F-2024-005', initial: 'M', name: 'Manoj Kumar Verma', location: 'Nagpur', crop: 'Orange', risk: 'MEDIUM', score: 55, landSize: '5.7 Acres', irrigation: 'Drip Irrigation', soil: '6.8 / 10', yield: '6.5 / 10', rain: '-8.1%', defaultProb: '44.0%' },
-];
-
-const loanHistory = [
-    { year: 2021, amount: '₹ 1,20,000', status: 'Repaid', statusColor: 'low', onTime: 'Yes' },
-    { year: 2022, amount: '₹ 1,80,000', status: 'Repaid', statusColor: 'low', onTime: 'Yes' },
-    { year: 2023, amount: '₹ 2,20,000', status: 'Active', statusColor: 'blue', onTime: 'Yes' },
-];
-
 function FarmerProfiles() {
-    const [activeFarmerId, setActiveFarmerId] = useState('F-2024-001');
-    const activeFarmer = farmersList.find(f => f.id === activeFarmerId) || farmersList[0];
+    const [farmers, setFarmers] = useState([]);
+    const [activeFarmerId, setActiveFarmerId] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        fetchFarmers();
+    }, []);
+
+    const fetchFarmers = async () => {
+        try {
+            setLoading(true);
+            const response = await fetch('/applications');
+            const data = await response.json();
+            
+            // Map backend data to frontend format
+            const mappedFarmers = data.map(app => {
+                const risk_raw = (app.risk_category || 'low').toUpperCase();
+                const risk_label = risk_raw.includes('HIGH') ? 'HIGH' : (risk_raw.includes('MEDIUM') ? 'MEDIUM' : 'LOW');
+                
+                return {
+                    id: `APP-${app.id.toString().padStart(3, '0')}`,
+                    dbId: app.id,
+                    initial: app.farmer_name.charAt(0).toUpperCase(),
+                    name: app.farmer_name,
+                    location: app.district,
+                    crop: app.crop_type,
+                    risk: risk_label,
+                    score: Math.round(app.trust_score),
+                    landSize: `${app.land_size} Acres`,
+                    irrigation: app.irrigation_type || 'Unknown',
+                    soil: `${app.soil_fertility_score} / 100`,
+                    yield: `${app.yield_stability_score} / 100`,
+                    rain: `${app.rainfall_deviation.toFixed(1)}%`,
+                    defaultProb: risk_label === 'HIGH' ? 'High' : (risk_label === 'MEDIUM' ? 'Medium' : 'Low'),
+                    loanAmount: app.loan_amount,
+                    status: app.status === 'Approved' ? 'Accepted' : app.status,
+                    date: app.created_at
+                };
+            });
+
+            setFarmers(mappedFarmers);
+            if (mappedFarmers.length > 0) {
+                setActiveFarmerId(mappedFarmers[0].id);
+            }
+        } catch (error) {
+            console.error("Failed to fetch farmers:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const activeFarmer = farmers.find(f => f.id === activeFarmerId) || farmers[0];
+
+    if (loading) return <div className="loading-state">Loading farmer data...</div>;
+    if (farmers.length === 0) return <div className="empty-state">No farmer profiles found. Create a loan request to see them here.</div>;
 
     return (
         <div className="profiles-container">
@@ -28,7 +67,7 @@ function FarmerProfiles() {
                     <span className="count-badge">8</span>
                 </div>
                 <div className="farmer-list">
-                    {farmersList.map(farmer => (
+                    {farmers.map(farmer => (
                         <div
                             key={farmer.id}
                             className={`list-item ${activeFarmerId === farmer.id ? 'active' : ''}`}
@@ -109,25 +148,21 @@ function FarmerProfiles() {
                     <table className="history-table">
                         <thead>
                             <tr>
-                                <th>YEAR</th>
+                                <th>DATE</th>
                                 <th>LOAN AMOUNT</th>
                                 <th>STATUS</th>
-                                <th>ON TIME</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {loanHistory.map((loan, i) => (
-                                <tr key={i}>
-                                    <td>{loan.year}</td>
-                                    <td className="font-medium">{loan.amount}</td>
-                                    <td>
-                                        <span className={`status-badge status-${loan.statusColor}`}>
-                                            {loan.status}
-                                        </span>
-                                    </td>
-                                    <td className="text-green">✓ {loan.onTime}</td>
-                                </tr>
-                            ))}
+                            <tr>
+                                <td>{new Date(activeFarmer.date + 'Z').toLocaleDateString()}</td>
+                                <td className="font-medium">₹{activeFarmer.loanAmount.toLocaleString()}</td>
+                                <td>
+                                    <span className={`status-badge pill-${activeFarmer.status.toLowerCase()}`}>
+                                        {activeFarmer.status}
+                                    </span>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
